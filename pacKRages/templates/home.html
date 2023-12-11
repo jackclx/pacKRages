@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    .header {
+      background-color: #3557ad;
+      color: white;
+      padding: 10px 0;
+      border-bottom: 5px solid #2000f3;
+    }
+
+    .header h1 {
+      font-size: 3em;
+    }
+
+    .content {
+      padding: 3%;
+    }
+
+
+
+
+.centered-button {
+    text-align: center; /* Center-align elements within this div */
+    /* width: 100%; */
+}
+
+
+.content input[type="file"] {
+   margin-left: 155px;   
+}
+
+.content input[type="submit"] {
+   font-size: 1em;
+   margin: 10px 0;
+}
+
+    .content input[type="submit"] {
+      background-color: #3557ad;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+
+    .content input[type="submit"]:hover {
+      background-color: #203b8a;
+    }
+
+    .footer {
+      background-color: #3557ad;
+      color: white;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .image-preview {
+      max-width: 100%;
+      max-height: 250px; /* Adjust as needed */
+      margin: 10px auto;
+      display: block;
+    }
+
+    @media (max-width: 414px) {
+      .header h1 {
+        font-size: 3em;
+      }
+
+      .content form {
+        width: 90%;
+        margin: auto;
+      }
+
+      .content p {
+        width: 90%;
+        margin: 20px auto;
+      }
+    }
+  </style>
+  <title>PacKRages - Photo Upload</title>
+</head>
+<body>
+
+  <div class="header">
+    <h1>PacKRages</h1>
+  </div>
+  <h2>Upload Image of the Parcel details :</h2>
+  <div class="content">
+    <form action="/" method="post" enctype="multipart/form-data">
+      <div class="centered-button">
+        <input type="file" name="fileToUpload" id="fileToUpload" onchange="previewFile()">
+      </div>
+        <img id="imagePreview" class="image-preview" style="display: none;">
+        <div class="centered-button">
+          <input type="submit" value="Upload" name="submit">
+      </div>
+      </div>
+    </form>
+    <p id="counterDisplay" style="width: 400px; margin: auto; height: 50px; font-weight: bold; display: none;">
+      Please place parcel in Box :
+      <br>
+      <span style="color: red; font-size:50px;">{{ counter }}</span>
+    </p>
+  </div>
+
+  <div class="footer">
+    <p>© 2023 PacKRages. All rights reserved.</p>
+  </div>
+
+  <script>
+     function previewFile() {
+      var preview = document.getElementById('imagePreview');
+      var counterDisplay = document.getElementById('counterDisplay');
+      var file = document.getElementById('fileToUpload').files[0];
+      var reader = new FileReader();
+
+      reader.onloadend = function () {
+        if (file) {
+          preview.src = reader.result;
+          preview.style.display = 'block'; // Display the preview
+          counterDisplay.style.display = 'block'; // Show counter
+        } else {
+          preview.src = "";
+          preview.style.display = 'none'; // Hide the preview
+          counterDisplay.style.display = 'none'; // Hide counter
+        }
+      }
+
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        preview.src = "";
+        preview.style.display = 'none'; // Hide the preview
+        counterDisplay.style.display = 'none'; // Hide counter
+      }
+    }
+  </script>
+
+</body>
+</html>
+
+
+
+
